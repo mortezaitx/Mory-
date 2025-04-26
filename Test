@@ -1,0 +1,39 @@
+main.py
+import os
+import time
+import requests
+import telegram
+
+BOT_TOKEN = os.getenv('BOT_TOKEN')
+CHAT_ID = os.getenv('CHAT_ID')
+GLASSNODE_API_KEY = os.getenv('GLASSNODE_API_KEY')
+
+bot = telegram.Bot(token=BOT_TOKEN)
+
+def get_sth_sopr():
+    url = "https://api.glassnode.com/v1/metrics/indicators/sopr_short_term_holder"
+    params = {
+        'a': 'BTC',
+        'api_key': GLASSNODE_API_KEY,
+        'i': '10m'  # 10 dakika çözünürlük
+    }
+    response = requests.get(url, params=params)
+    data = response.json()
+    return data[-1]['v'] if data else None
+
+def main():
+    while True:
+        try:
+            sopr_value = get_sth_sopr()
+            print(f"Son STH-SOPR Değeri: {sopr_value}")
+            
+            if sopr_value is not None and sopr_value < 0.995:
+                bot.send_message(chat_id=CHAT_ID, text=f"ALARM: STH-SOPR {sopr_value:.3f} seviyesine düştü. Satış baskısı artıyor!")
+
+        except Exception as e:
+            print(f"Hata oluştu: {e}")
+
+        time.sleep(600)
+
+if __name__ == '__main__':
+    main()
