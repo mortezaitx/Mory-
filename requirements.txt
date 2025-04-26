@@ -1,7 +1,5 @@
 requests
 python-telegram-bot
-requests
-python-telegram-bot
 ``` |
 | Commit new file tıkla. |
 
