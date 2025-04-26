@@ -1,0 +1,22 @@
+requests
+python-telegram-bot
+requests
+python-telegram-bot
+``` |
+| Commit new file tıkla. |
+
+---
+
+Bunu da yaptıktan sonra:  
+> Railway ile direkt deploy yapacağız!
+
+Botun çalışmasına dakikalar kaldı!
+
+---
+
+**Şimdi:**  
+- `requirements.txt` dosyasını oluştur.  
+- Bana "**requirements.txt de tamam**" diye yaz.
+
+Hazır mısın?  
+Başlayalım mı? (Artık %90’a geldik!)
